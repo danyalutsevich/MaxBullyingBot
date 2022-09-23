@@ -7,7 +7,6 @@ from telegram.ext.dispatcher import Dispatcher
 from telegram.update import Update 
 from telegram.ext.callbackcontext import CallbackContext
 from telegram.bot import Bot
-import numpy as np
 
 # from asyncore import dispatcher
 
@@ -19,8 +18,8 @@ bullying_messages = ["МАКС СДЕЛАЙ ДЗ"]
 dispatcher1 : Dispatcher = updater.dispatcher
 
 def echo(update: Update, context: CallbackContext):
-    if(update.message.from_user.username == 'KXFCODE'):
-        update.message.reply_text(bullying_messages[np.random.randint(0, len(bullying_messages) - 1)]) 
+    if(update.message.from_user.username == 'danyalutsevich'):
+        update.message.reply_text('МАКС СДЕЛАЙ ДЗ') 
 
 dispatcher1.add_handler(MessageHandler(Filters.text, echo))
 
