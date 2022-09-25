@@ -8,9 +8,6 @@ from telegram.update import Update
 from telegram.ext.callbackcontext import CallbackContext
 from telegram.bot import Bot
 
-# from asyncore import dispatcher
-
-# bot = Bot(token='5504760756:AAFiG1aZUlYtxmMGVvVgJuikPG1OVI9-J-M')
 updater = Updater(token='5504760756:AAFiG1aZUlYtxmMGVvVgJuikPG1OVI9-J-M', use_context=True)
 
 bullying_messages = ["МАКС СДЕЛАЙ ДЗ"]
@@ -21,7 +18,11 @@ def echo(update: Update, context: CallbackContext):
     if(update.message.from_user.username == 'danyalutsevich'):
         update.message.reply_text('МАКС СДЕЛАЙ ДЗ') 
 
-dispatcher1.add_handler(MessageHandler(Filters.text, echo))
+def ping(update: Update, context: CallbackContext):
+    update.message.reply_text('pong')
 
+
+dispatcher1.add_handler(MessageHandler(Filters.text, echo))
+dispatcher1.add_handler(CommandHandler('ping', ping))
 
 updater.start_polling()
