@@ -15,7 +15,7 @@ bullying_messages = ["МАКС СДЕЛАЙ ДЗ"]
 dispatcher1 : Dispatcher = updater.dispatcher
 
 def echo(update: Update, context: CallbackContext):
-    if(update.message.from_user.username == 'danyalutsevich'):
+    if(update.message.from_user.username == 'KXFCODE'):
         update.message.reply_text('МАКС СДЕЛАЙ ДЗ') 
 
 def ping(update: Update, context: CallbackContext):
