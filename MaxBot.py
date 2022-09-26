@@ -1,28 +1,36 @@
-from asyncore import dispatcher
-from email.message import Message
-from telegram.ext.commandhandler import CommandHandler
-from telegram.ext.messagehandler import MessageHandler, Filters
-from telegram.ext.updater import Updater
-from telegram.ext.dispatcher import Dispatcher
-from telegram.update import Update 
-from telegram.ext.callbackcontext import CallbackContext
-from telegram.bot import Bot
+from telegram import Update, ForceReply
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 
-updater = Updater(token='5441776897:AAHIsMl17B1avefQ97kYuQWzWzEldfL8_Ak', use_context=True)
+def ping(update: Update, context: CallbackContext) -> None:
+    update.message.reply_text("pong")
 
-bullying_messages = ["МАКС СДЕЛАЙ ДЗ"]
+def echo(update: Update, context: CallbackContext) -> None:
+    """Echo the user message."""
+    if update.message.from_user.username == "KXFCODE" :
+        update.message.reply_text("Макс зроби будь ласка дз")
 
-dispatcher1 : Dispatcher = updater.dispatcher
+def main() -> None:
+    """Start the bot."""
+    # Create the Updater and pass it your bot's token.
+    updater = Updater("5441776897:AAHIsMl17B1avefQ97kYuQWzWzEldfL8_Ak")
 
-def echo(update: Update, context: CallbackContext):
-    if(update.message.from_user.username == 'KXFCODE'):
-        update.message.reply_text('МАКС СДЕЛАЙ ДЗ') 
+    # Get the dispatcher to register handlers
+    dispatcher = updater.dispatcher
 
-def ping(update: Update, context: CallbackContext):
-    update.message.reply_text('pong')
+    # on different commands - answer in Telegram
+    dispatcher.add_handler(CommandHandler("ping", ping))
+
+    # on non command i.e message - echo the message on Telegram
+    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, echo))
+
+    # Start the Bot
+    updater.start_polling()
+
+    # Run the bot until you press Ctrl-C or the process receives SIGINT,
+    # SIGTERM or SIGABRT. This should be used most of the time, since
+    # start_polling() is non-blocking and will stop the bot gracefully.
+    updater.idle()
 
 
-dispatcher1.add_handler(CommandHandler('ping', ping))
-dispatcher1.add_handler(MessageHandler(Filters.text, echo))
-
-updater.start_polling()
+if __name__ == '__main__':
+    main()
