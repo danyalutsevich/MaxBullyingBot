@@ -13,7 +13,7 @@ def echo(update: Update, context: CallbackContext) -> None:
     print(f"{update.message.from_user.id} {update.message.from_user.username}")
 
 def main() -> None:
-    updater = Updater("5441776897:AAHIsMl17B1avefQ97kYuQWzWzEldfL8_Ak")
+    updater = Updater("TOKEN")
 
     dispatcher = updater.dispatcher
 
